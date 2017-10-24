@@ -36,15 +36,26 @@ function inicializaCronometros() {
             
             tempoRestante--;
             $("#tempo-digitacao").text(tempoRestante);
-    
+
+            // if( frase.startsWith(digitado)) {
+            //     campo.addClass("borda-verde");
+            //    } else {
+            //     campo.addClass("borda-vermelha");
+            //    }
+
             if(tempoRestante < 1){
-               campo.attr("disabled",true);
                clearInterval(cronometro);
-               botaoReiniciar.toggleClass("botao-desativado");
-               campo.toggleClass("campo-desativado");
+               finalizaJogo();
             }
         },1000);    
     });    
+}
+
+function finalizaJogo() {
+    campo.attr("disabled",true);
+    botaoReiniciar.toggleClass("botao-desativado");
+    campo.toggleClass("campo-desativado");
+    inserePlacar();
 }
 
 function inicializaMarcadores() {
@@ -63,6 +74,27 @@ function inicializaMarcadores() {
     
     });
 }
+
+function inserePlacar() {
+    var corpoTabela = $(".placar").find("tbody");
+    var usuario = "Wesley";
+    var numPalavras = $("#contador-palavras").text();
+    var botaoRemover = "<a href='#' class='botao-remover'><i class='small material-icons'>delete</i></a>"
+    var linha = "<tr>"+
+                    "<td>" + usuario + "</td>"+
+                    "<td>" + numPalavras + "</td>"+
+                    "<td>" + botaoRemover + "</td>"+
+                "</tr>";
+
+    corpoTabela.append(linha);   
+    //corpoTabela.prepend(linha);   
+    
+}
+
+$(".botao-remover").click(function(event){
+    event.preventDefault();
+    $(this).parent().parent().remove();
+});
 
 function reiniciaJogo() {
         campo.attr("disabled", false);
