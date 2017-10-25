@@ -75,27 +75,6 @@ function inicializaMarcadores() {
     });
 }
 
-function inserePlacar() {
-    var corpoTabela = $(".placar").find("tbody");
-    var usuario = "Wesley";
-    var numPalavras = $("#contador-palavras").text();
-    var botaoRemover = "<a href='#' class='botao-remover'><i class='small material-icons'>delete</i></a>"
-    var linha = "<tr>"+
-                    "<td>" + usuario + "</td>"+
-                    "<td>" + numPalavras + "</td>"+
-                    "<td>" + botaoRemover + "</td>"+
-                "</tr>";
-
-    corpoTabela.append(linha);   
-    //corpoTabela.prepend(linha);   
-    
-}
-
-$(".botao-remover").click(function(event){
-    event.preventDefault();
-    $(this).parent().parent().remove();
-});
-
 function reiniciaJogo() {
         campo.attr("disabled", false);
         campo.val("");
@@ -104,8 +83,6 @@ function reiniciaJogo() {
         $("#tempo-digitacao").text(tempoInicial);
         inicializaCronometros();
         campo.toggleClass("campo-desativado");
-        campo.removeClass("borda-vermelha")
+        campo.removeClass("borda-vermelha");
         campo.removeClass("borda-verde");
 }
-
-
